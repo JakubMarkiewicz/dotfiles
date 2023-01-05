@@ -19,7 +19,7 @@ telescope.setup {
 		dynamic_preview_title = true,
 		mappings = {
 			n = {
-				["q"] = actions.close
+				["q"] = actions.close,
 			},
 		},
 	},
