@@ -1,0 +1,49 @@
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="kennethreitz"
+
+
+zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+zstyle ':omz:update' frequency 1
+
+
+# plugins 
+plugins=(
+  git
+  sudo
+  zsh-autosuggestions
+  yarn
+)
+
+# omz
+source $ZSH/oh-my-zsh.sh
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH=~/.yarn/bin:$PATH
+
+source ~/.zshrc_VERDACCIO
+# Golang path
+export GOPATH="$HOME/go"
+PATH="$GOPATH/bin:$PATH"
+
+# Aliasses
+alias vim="nvim"
+
+# bun completions
+[ -s "/Users/jakubmarkiewicz/.bun/_bun" ] && source "/Users/jakubmarkiewicz/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
