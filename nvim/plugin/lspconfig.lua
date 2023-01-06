@@ -22,10 +22,21 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-nvim_lsp.tsserver.setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
+-- nvim_lsp.tsserver.setup {
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- }
+require("typescript").setup({
+	disable_commands = false, -- prevent the plugin from creating Vim commands
+	debug = false, -- enable debug logging for commands
+	go_to_source_definition = {
+		fallback = true, -- fall back to standard LSP definition on failure
+	},
+	server = { -- pass options to lspconfig's setup method
+		on_attach = on_attach,
+		capabilities = capabilities
+	},
+})
 
 nvim_lsp.jsonls.setup { on_attach = on_attach }
 

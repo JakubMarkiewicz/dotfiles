@@ -38,3 +38,5 @@ v.opt.clipboard:append { 'unnamedplus' }
 v.opt.background = "dark"
 
 v.cmd([[colorscheme kanagawa]])
+
+v.opt.showtabline = 2

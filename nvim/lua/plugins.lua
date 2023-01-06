@@ -28,6 +28,9 @@ lazy.setup({
 	"jose-elias-alvarez/null-ls.nvim",
 	"MunifTanjim/prettier.nvim",
 
+	-- tsserver lsp support
+	"jose-elias-alvarez/typescript.nvim",
+
 	-- git
 	"lewis6991/gitsigns.nvim",
 	"dinhhuy258/git.nvim",

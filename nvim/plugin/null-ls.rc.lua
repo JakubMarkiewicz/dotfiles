@@ -24,9 +24,12 @@ null_ls.setup {
 		null_ls.builtins.code_actions.eslint_d.with({ condition = has_eslint_configured }),
 		null_ls.builtins.diagnostics.eslint_d.with({ condition = has_eslint_configured }),
 
-		null_ls.builtins.diagnostics.tsc,
-		null_ls.builtins.code_actions.tsc,
-		null_ls.builtins.completion.tsc,
+
+		require("typescript.extensions.null-ls.code-actions"),
+
+		--	null_ls.builtins.diagnostics.tsc,
+		--	null_ls.builtins.code_actions.tsc,
+		--	null_ls.builtins.completion.tsc,
 
 		null_ls.builtins.diagnostics.cspell,
 		null_ls.builtins.code_actions.cspell
