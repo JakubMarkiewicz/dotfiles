@@ -7,19 +7,18 @@ end
 
 lazy.setup({
 	-- copilot
-	"github/copilot.vim",
+	{ "github/copilot.vim", lazy = false },
+
 	-- highlight todo comments
 	"folke/todo-comments.nvim",
 
 	-- highlight occurrences of current cursor word
 	"RRethy/vim-illuminate",
 
-	-- theme
-	"rebelot/kanagawa.nvim",
 
 	-- tree-sitter
 	-- incremental language parser
-	-- usefull for better highlighting
+	-- useful for better highlighting
 	{ "nvim-treesitter/nvim-treesitter", run = "TSUpdate" },
 
 	-- prettier support
@@ -35,7 +34,7 @@ lazy.setup({
 
 	-- git
 	"lewis6991/gitsigns.nvim",
-	"dinhhuy258/git.nvim",
+	{ "dinhhuy258/git.nvim", cmd = "StartupTime", lazy = false, config = true },
 
 	-- lspsaga - lsp uis
 	"glepnir/lspsaga.nvim",
@@ -55,6 +54,7 @@ lazy.setup({
 	"hrsh7th/cmp-buffer",
 	"hrsh7th/cmp-path",
 	"hrsh7th/cmp-cmdline",
+	"saadparwaiz1/cmp_luasnip",
 
 	-- autopairs
 	"windwp/nvim-autopairs",
@@ -82,4 +82,11 @@ lazy.setup({
 
 	-- transparency
 	"xiyaowong/nvim-transparent",
+
+	-- theme
+	{ "rebelot/kanagawa.nvim",
+		lazy = false,
+		config = function()
+			vim.cmd([[colorscheme kanagawa]])
+		end },
 })
