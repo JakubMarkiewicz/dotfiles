@@ -23,7 +23,8 @@ cmp.setup({
 		['<CR>'] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true
-		}), ['<Tab>'] = cmp.mapping(function(fallback)
+		}),
+		['<Tab>'] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				fallback()
 			elseif luasnip.expand_or_jumpable() then

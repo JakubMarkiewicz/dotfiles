@@ -6,6 +6,8 @@ if (not status) then
 end
 
 lazy.setup({
+	-- copilot
+	"github/copilot.vim",
 	-- highlight todo comments
 	"folke/todo-comments.nvim",
 
