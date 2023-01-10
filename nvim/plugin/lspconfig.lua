@@ -42,7 +42,6 @@ nvim_lsp.jsonls.setup { on_attach = on_attach }
 
 nvim_lsp.prismals.setup {
 	on_attach = on_attach,
-	filetypes = { "prisma" }
 }
 
 nvim_lsp.sumneko_lua.setup {

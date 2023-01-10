@@ -7,14 +7,17 @@ end
 
 lazy.setup({
 	-- copilot
-	{ "github/copilot.vim", lazy = false },
+	{ "github/copilot.vim", lazy = false, config = function()
+		-- copilot assume mapped
+		vim.g.copilot_assume_mapped = true
+		vim.g.copilot_no_tab_map = true
+	end },
 
 	-- highlight todo comments
 	"folke/todo-comments.nvim",
 
 	-- highlight occurrences of current cursor word
 	"RRethy/vim-illuminate",
-
 
 	-- tree-sitter
 	-- incremental language parser

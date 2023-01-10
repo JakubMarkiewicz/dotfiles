@@ -44,10 +44,10 @@ cmp.setup({
 		end, { 'i', 's' }),
 	}),
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp', max_item_count = 10 },
-		{ name = "luasnip" },
-		{ name = "path", keyword_length = 3, max_item_count = 3 },
-		{ name = 'buffer', keyword_length = 5, max_item_count = 3 },
+		{ name = 'nvim_lsp', },
+		{ name = "luasnip", },
+		{ name = "path", keyword_length = 3, max_item_count = 5 },
+		{ name = 'buffer', keyword_length = 5, max_item_count = 5 },
 	}),
 	formatting = {
 		format = lspkind.cmp_format({
@@ -64,7 +64,7 @@ cmp.setup({
 		}),
 	},
 	experimental = {
-		ghost_text = true,
+		ghost_text = false,
 		native_menu = false
 	}
 })
