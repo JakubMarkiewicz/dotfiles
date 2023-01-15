@@ -8,7 +8,6 @@ end
 lazy.setup({
 	-- copilot
 	{ "github/copilot.vim", lazy = false, config = function()
-		-- copilot assume mapped
 		vim.g.copilot_assume_mapped = true
 		vim.g.copilot_no_tab_map = true
 	end },
@@ -40,7 +39,18 @@ lazy.setup({
 	{ "dinhhuy258/git.nvim", cmd = "StartupTime", lazy = false, config = true },
 
 	-- lspsaga - lsp uis
-	"glepnir/lspsaga.nvim",
+	{
+		'glepnir/lspsaga.nvim',
+		event = 'BufRead',
+		opts = {
+			lightbulb = {
+				enable = true,
+				sign = true,
+				sign_priority = 40,
+				virtual_text = false,
+			},
+		}
+	},
 
 	-- lsp pictograms
 	"onsails/lspkind.nvim",

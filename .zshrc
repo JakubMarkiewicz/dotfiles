@@ -38,7 +38,7 @@ source ~/.zshrc_VERDACCIO
 export GOPATH="$HOME/go"
 PATH="$GOPATH/bin:$PATH"
 
-# Aliasses
+# Aliases
 alias vim="nvim"
 
 # bun completions

@@ -4,10 +4,6 @@ if (not status) then
 	return
 end
 
-saga.init_lsp_saga {
-	border_style = "single",
-}
-
 
 local key_mapper = function(mode, key, result)
 	vim.api.nvim_set_keymap(

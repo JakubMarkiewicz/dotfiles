@@ -19,4 +19,4 @@ bufferline.setup {
 
 
 vim.keymap.set('n', 'tn', '<Cmd>BufferLineCycleNext<CR>', {})
-vim.keymap.set('n', 'tp', '<Cmd>BufferLineCyclePrev<CR>', {})
+vim.keymap.set('n', 'tN', '<Cmd>BufferLineCyclePrev<CR>', {})

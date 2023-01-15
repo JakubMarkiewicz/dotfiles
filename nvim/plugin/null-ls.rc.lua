@@ -25,13 +25,6 @@ null_ls.setup {
 
 
 		require("typescript.extensions.null-ls.code-actions"),
-
-		--	null_ls.builtins.diagnostics.tsc,
-		--	null_ls.builtins.code_actions.tsc,
-		--	null_ls.builtins.completion.tsc,
-
-		null_ls.builtins.diagnostics.cspell,
-		null_ls.builtins.code_actions.cspell
 	},
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then
