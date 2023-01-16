@@ -14,6 +14,7 @@ local key_mapper = function(mode, key, result)
 	)
 end
 
+key_mapper("n", '<C-J>', "<Cmd>Lspsaga diagnostic_jump_prev<CR>")
 key_mapper('n', '<C-j>', '<Cmd>Lspsaga diagnostic_jump_next<CR>')
 key_mapper('n', 'K', '<Cmd>Lspsaga hover_doc<CR>')
 key_mapper('n', '<C-k>', '<Cmd>Lspsaga code_action<CR>')
