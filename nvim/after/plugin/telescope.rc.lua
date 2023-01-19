@@ -31,12 +31,18 @@ telescope.setup {
 			mappings = {
 				-- your custom insert mode mappings
 				["i"] = {
-					["<C-w>"] = function() vim.cmd('normal vbd') end,
+					["<C-w>"] = function()
+						vim.cmd('normal vbd')
+					end,
 				},
 				["n"] = {
-					["o"] = false,
-					["h"] = false,
+					-- open file with default app
+					["o"] = fb_actions.open,
+					-- toggle hidden
+					["h"] = fb_actions.toggle_hidden,
+					-- goto parent
 					["g"] = false,
+					-- goto home
 					["e"] = false,
 					["N"] = fb_actions.create,
 					["R"] = fb_actions.remove,

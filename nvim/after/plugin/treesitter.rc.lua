@@ -21,7 +21,8 @@ ts.setup {
 		'lua',
 		'json',
 		'css',
-		'prisma'
+		'prisma',
+		'vim'
 	},
 	autotag = {
 		enable = true
