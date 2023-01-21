@@ -17,6 +17,7 @@ ts.setup {
 	ensure_installed = {
 		'help',
 		'tsx',
+		'typescript',
 		'javascript',
 		'lua',
 		'json',
