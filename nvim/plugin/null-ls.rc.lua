@@ -18,6 +18,7 @@ null_ls.setup {
 	sources = {
 		-- i'd like to opt-in for prettierd but can't get it to work
 		null_ls.builtins.formatting.prettier,
+		null_ls.builtins.formatting.stylua,
 
 		--null_ls.builtins.formatting.eslint_d.with({ condition = has_eslint_configured }),
 		null_ls.builtins.code_actions.eslint_d.with({ condition = has_eslint_configured }),

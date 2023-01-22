@@ -1,15 +1,17 @@
 local status, telescope = pcall(require, "telescope")
-if (not status) then return end
-local actions = require('telescope.actions')
+if not status then
+	return
+end
+local actions = require("telescope.actions")
 local builtin = require("telescope.builtin")
 
 local function telescope_buffer_dir()
-	return vim.fn.expand('%:p:h')
+	return vim.fn.expand("%:p:h")
 end
 
-local fb_actions = require "telescope".extensions.file_browser.actions
+local fb_actions = require("telescope").extensions.file_browser.actions
 
-telescope.setup {
+telescope.setup({
 	defaults = {
 		layout_strategy = "horizontal",
 		prompt_prefix = ":: ",
@@ -29,12 +31,6 @@ telescope.setup {
 			-- disables netrw and use telescope-file-browser in its place
 			hijack_netrw = true,
 			mappings = {
-				-- your custom insert mode mappings
-				["i"] = {
-					["<C-w>"] = function()
-						vim.cmd('normal vbd')
-					end,
-				},
 				["n"] = {
 					-- open file with default app
 					["o"] = fb_actions.open,
@@ -44,34 +40,38 @@ telescope.setup {
 					["g"] = false,
 					-- goto home
 					["e"] = false,
+					-- create new
 					["N"] = fb_actions.create,
+					-- remove
 					["R"] = fb_actions.remove,
-					["/"] = function()
-						vim.cmd('startinsert')
-					end
 				},
 			},
 		},
 	},
-}
+})
 
 telescope.load_extension("file_browser")
 
-vim.keymap.set('n', ';f',
-	function()
-		builtin.find_files({
-			no_ignore = false,
-			hidden = false,
-			respect_gitignore = false,
+-- find files
+vim.keymap.set("n", ";f", function()
+	builtin.find_files({
+		no_ignore = false,
+		hidden = false,
+		respect_gitignore = false,
+	})
+end)
 
-		})
-	end)
-vim.keymap.set('n', ';r', function()
+-- resume previous telescope action
+vim.keymap.set("n", ";r", function()
+	builtin.resume()
+end)
+
+-- grep in files
+vim.keymap.set("n", ";g", function()
 	builtin.live_grep()
 end)
-vim.keymap.set('n', ';e', function()
-	builtin.diagnostics()
-end)
+
+-- file browser
 vim.keymap.set("n", ";t", function()
 	telescope.extensions.file_browser.file_browser({
 		cwd = telescope_buffer_dir(),
@@ -84,7 +84,7 @@ vim.keymap.set("n", ";t", function()
 	})
 end)
 
+-- buffers
 vim.keymap.set("n", ";b", function()
 	builtin.buffers()
-
 end)

@@ -1,11 +1,11 @@
-local status, ts = pcall(require, 'nvim-treesitter.configs')
+local status, ts = pcall(require, "nvim-treesitter.configs")
 
-if (not status) then
-	print 'nvim-treesitter not installed'
+if not status then
+	print("nvim-treesitter not installed")
 	return
 end
 
-ts.setup {
+ts.setup({
 	highlight = {
 		enable = true,
 		disable = {},
@@ -15,17 +15,21 @@ ts.setup {
 		disable = {},
 	},
 	ensure_installed = {
-		'help',
-		'tsx',
-		'typescript',
-		'javascript',
-		'lua',
-		'json',
-		'css',
-		'prisma',
-		'vim'
+		"bash",
+		"css",
+		"diff",
+		"dockerfile",
+		"help",
+		"javascript",
+		"jsdoc",
+		"json",
+		"lua",
+		"prisma",
+		"tsx",
+		"typescript",
+		"vim",
 	},
 	autotag = {
-		enable = true
-	}
-}
+		enable = true,
+	},
+})
