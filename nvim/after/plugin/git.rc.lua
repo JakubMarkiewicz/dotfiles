@@ -1,11 +1,11 @@
 local status, git = pcall(require, "git")
 
-if (not status) then
+if not status then
 	print("git not installed")
 	return
 end
 
-git.setup {
+git.setup({
 	keymaps = {
 		-- Open blame window
 		blame = "<Leader>gb",
@@ -16,6 +16,6 @@ git.setup {
 		-- Close git diff
 		diff_close = "<Leader>gD",
 		-- Close blame window
-		quit_blame = "q"
-	}
-}
+		quit_blame = "q",
+	},
+})
