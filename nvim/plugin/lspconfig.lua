@@ -1,10 +1,9 @@
 local status, nvim_lsp = pcall(require, "lspconfig")
 
-if (not status) then
+if not status then
 	print("lspconfig not installed")
 	return
 end
-
 
 local on_attach = function(client, bufnr)
 	-- format on save
@@ -15,12 +14,11 @@ local on_attach = function(client, bufnr)
 	-- 		callback = function() vim.lsp.buf.formatting_seq_sync() end
 	-- 	})
 	-- end
-
 end
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 -- nvim_lsp.tsserver.setup {
 -- 	on_attach = on_attach,
@@ -34,32 +32,32 @@ require("typescript").setup({
 	},
 	server = { -- pass options to lspconfig's setup method
 		on_attach = on_attach,
-		capabilities = capabilities
+		capabilities = capabilities,
 	},
 })
 
-nvim_lsp.jsonls.setup { on_attach = on_attach }
+nvim_lsp.jsonls.setup({ on_attach = on_attach })
 
-nvim_lsp.prismals.setup {
+nvim_lsp.prismals.setup({
 	on_attach = on_attach,
-}
+})
 
-nvim_lsp.sumneko_lua.setup {
+nvim_lsp.lua_ls.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {
 		Lua = {
 			diagnostics = {
-				globals = { 'vim' }
+				globals = { "vim" },
 			},
 
 			workspace = {
-				library = vim.api.nvim_get_runtime_file("", true)
-			}
-		}
-	}
-}
+				library = vim.api.nvim_get_runtime_file("", true),
+			},
+		},
+	},
+})
 
-nvim_lsp.eslint.setup {
-	on_attach = on_attach
-}
+nvim_lsp.eslint.setup({
+	on_attach = on_attach,
+})
