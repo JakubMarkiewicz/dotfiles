@@ -10,4 +10,5 @@ transparent.setup({
 	extra_groups = { -- table/string: additional groups that should be cleared
 	},
 	exclude = {}, -- table: groups you don't want to clear
+	ignore_linked_group = true,
 })

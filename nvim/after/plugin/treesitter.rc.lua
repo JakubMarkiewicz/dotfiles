@@ -28,6 +28,8 @@ ts.setup({
 		"tsx",
 		"typescript",
 		"vim",
+		"markdown",
+		"markdown_inline",
 	},
 	autotag = {
 		enable = true,

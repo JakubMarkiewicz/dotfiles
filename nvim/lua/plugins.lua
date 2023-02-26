@@ -1,16 +1,20 @@
 local status, lazy = pcall(require, "lazy")
 
-if (not status) then
-	print "lazy is not installed"
+if not status then
+	print("lazy is not installed")
 	return
 end
 
 lazy.setup({
 	-- copilot
-	{ "github/copilot.vim", lazy = false, config = function()
-		vim.g.copilot_assume_mapped = true
-		vim.g.copilot_no_tab_map = true
-	end },
+	{
+		"github/copilot.vim",
+		lazy = false,
+		config = function()
+			vim.g.copilot_assume_mapped = true
+			vim.g.copilot_no_tab_map = true
+		end,
+	},
 
 	-- highlight todo comments
 	"folke/todo-comments.nvim",
@@ -40,8 +44,8 @@ lazy.setup({
 
 	-- lspsaga - lsp uis
 	{
-		'glepnir/lspsaga.nvim',
-		event = 'BufRead',
+		"glepnir/lspsaga.nvim",
+		event = "BufRead",
 		opts = {
 			lightbulb = {
 				enable = true,
@@ -49,7 +53,7 @@ lazy.setup({
 				sign_priority = 40,
 				virtual_text = false,
 			},
-		}
+		},
 	},
 
 	-- lsp pictograms
@@ -97,9 +101,27 @@ lazy.setup({
 	"xiyaowong/nvim-transparent",
 
 	-- theme
-	{ "rebelot/kanagawa.nvim",
+	{
+		"rebelot/kanagawa.nvim",
 		lazy = false,
 		config = function()
-			vim.cmd([[colorscheme kanagawa]])
-		end },
+			--vim.cmd([[colorscheme kanagawa]])
+		end,
+	},
+
+	{
+		"ellisonleao/gruvbox.nvim",
+		lazy = false,
+		config = function()
+			vim.cmd([[colorscheme gruvbox]])
+		end,
+	},
+
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		config = function()
+			--vim.cmd([[colorscheme tokyonight-night]])
+		end,
+	},
 })
