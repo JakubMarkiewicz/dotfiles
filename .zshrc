@@ -33,7 +33,6 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH=~/.yarn/bin:$PATH
 
-source ~/.zshrc_VERDACCIO
 # Golang path
 export GOPATH="$HOME/go"
 PATH="$GOPATH/bin:$PATH"
