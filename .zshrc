@@ -10,13 +10,15 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="kennethreitz"
 
+# just remind me to update when it's time
 
-zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+zstyle ':omz:update' mode reminder
 zstyle ':omz:update' frequency 1
 
 
 # plugins 
 plugins=(
+  git-auto-fetch
   git
   sudo
   zsh-autosuggestions
