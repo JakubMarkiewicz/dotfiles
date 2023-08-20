@@ -1,7 +1,7 @@
 local status, null_ls = pcall(require, "null-ls")
 
-if (not status) then
-	print "Null-ls not installed"
+if not status then
+	print("Null-ls not installed")
 	return
 end
 
@@ -13,7 +13,7 @@ local function has_eslint_configured(utils)
 	return utils.root_has_file(".eslintrc.js")
 end
 
-null_ls.setup {
+null_ls.setup({
 	diagnostics_format = "[#{c}] #{m} (#{s})",
 	sources = {
 		-- i'd like to opt-in for prettierd but can't get it to work
@@ -24,8 +24,6 @@ null_ls.setup {
 		null_ls.builtins.code_actions.eslint_d.with({ condition = has_eslint_configured }),
 		null_ls.builtins.diagnostics.eslint_d.with({ condition = has_eslint_configured }),
 
-
-		require("typescript.extensions.null-ls.code-actions"),
 	},
 	-- configure format on save
 	on_attach = function(current_client, bufnr)
@@ -45,5 +43,5 @@ null_ls.setup {
 				end,
 			})
 		end
-	end
-}
+	end,
+})

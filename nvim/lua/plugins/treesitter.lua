@@ -19,6 +19,7 @@ ts.setup({
 		"css",
 		"diff",
 		"dockerfile",
+		"graphql",
 		"help",
 		"javascript",
 		"jsdoc",
