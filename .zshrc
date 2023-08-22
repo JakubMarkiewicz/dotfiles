@@ -20,7 +20,6 @@ zstyle ':omz:update' frequency 1
 plugins=(
   git-auto-fetch
   git
-  sudo
   zsh-autosuggestions
   yarn
 )
@@ -41,6 +40,7 @@ PATH="$GOPATH/bin:$PATH"
 
 # Aliases
 alias vim="nvim"
+alias vi="nvim"
 
 # bun completions
 [ -s "/Users/jakubmarkiewicz/.bun/_bun" ] && source "/Users/jakubmarkiewicz/.bun/_bun"
