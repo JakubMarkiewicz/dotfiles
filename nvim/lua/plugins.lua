@@ -230,7 +230,10 @@ lazy.setup({
 				-- ...
 			})
 
-			vim.cmd("colorscheme github_dark_high_contrast")
+			vim.cmd("colorscheme github_dark_dimmed")
 		end,
 	},
+
+	-- indent
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 })
