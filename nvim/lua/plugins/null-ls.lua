@@ -5,9 +5,8 @@ if not status then
 	return
 end
 
-local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
 local event = "BufWritePre" -- or "BufWritePost"
-local async = event == "BufWritePost"
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local function has_eslint_configured(utils)
 	return utils.root_has_file(".eslintrc.js")
@@ -23,7 +22,6 @@ null_ls.setup({
 		--null_ls.builtins.formatting.eslint_d.with({ condition = has_eslint_configured }),
 		null_ls.builtins.code_actions.eslint_d.with({ condition = has_eslint_configured }),
 		null_ls.builtins.diagnostics.eslint_d.with({ condition = has_eslint_configured }),
-
 	},
 	-- configure format on save
 	on_attach = function(current_client, bufnr)
@@ -33,13 +31,7 @@ null_ls.setup({
 				group = augroup,
 				buffer = bufnr,
 				callback = function()
-					vim.lsp.buf.format({
-						filter = function(client)
-							--  only use null-ls for formatting instead of lsp server
-							return client.name == "null-ls"
-						end,
-						bufnr = bufnr,
-					})
+					vim.lsp.buf.format({ async = false })
 				end,
 			})
 		end

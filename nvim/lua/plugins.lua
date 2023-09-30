@@ -31,17 +31,12 @@ lazy.setup({
 		end,
 	},
 
-	-- search and replace
+	-- global search and replace
 	{
 		"windwp/nvim-spectre",
 		config = function()
 			require("plugins.spectre")
 		end,
-	},
-
-	-- highlight todo comments
-	{
-		"folke/todo-comments.nvim",
 	},
 
 	-- highlight occurrences of current cursor word
@@ -114,7 +109,11 @@ lazy.setup({
 	{
 		"pmizio/typescript-tools.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		opts = {},
+		opts = {
+			settings = {
+				expose_as_code_action = "all",
+			},
+		},
 	},
 
 	-- git
@@ -173,6 +172,9 @@ lazy.setup({
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		opts = {}, -- this is equalent to setup({}) function
+		config = function()
+			require("plugins.autopairs")
+		end,
 	},
 
 	-- lualine
@@ -223,7 +225,7 @@ lazy.setup({
 
 	{
 		"projekt0n/github-nvim-theme",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		lazy = false,  -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			require("github-theme").setup({
