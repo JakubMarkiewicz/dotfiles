@@ -41,7 +41,7 @@ PATH="$GOPATH/bin:$PATH"
 # Aliases
 alias vim="nvim"
 alias vi="nvim"
-alias __dots="vim ~/Projects/Personal/dots/"
+alias __dots="cd ~/Projects/Personal/dots/; vim"
 
 # bun completions
 [ -s "/Users/jakubmarkiewicz/.bun/_bun" ] && source "/Users/jakubmarkiewicz/.bun/_bun"

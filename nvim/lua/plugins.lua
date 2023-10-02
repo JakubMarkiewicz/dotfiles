@@ -98,7 +98,7 @@ lazy.setup({
 		end,
 	},
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		config = function()
 			require("plugins.null-ls")
 		end,
@@ -222,17 +222,28 @@ lazy.setup({
 	"williamboman/mason-lspconfig.nvim",
 
 	-- theme
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		config = function()
+			--require("github-theme").setup({
+			--	-- ...
+			--})
+
+			vim.cmd("colorscheme catppuccin-mocha")
+		end,
+	},
 
 	{
 		"projekt0n/github-nvim-theme",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		lazy = true,   -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			require("github-theme").setup({
-				-- ...
-			})
+			--require("github-theme").setup({
+			--	-- ...
+			--})
 
-			vim.cmd("colorscheme github_dark_dimmed")
+			--vim.cmd("colorscheme github_dark_dimmed")
 		end,
 	},
 
