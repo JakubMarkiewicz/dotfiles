@@ -19,6 +19,7 @@ v.opt.softtabstop = 2
 v.opt.shiftwidth = 2
 v.opt.autoindent = true
 v.opt.smartindent = true
+v.opt.pumheight = 10
 
 v.opt.clipboard:append({ "unnamedplus" })
 
