@@ -41,7 +41,9 @@ PATH="$GOPATH/bin:$PATH"
 # Aliases
 alias vim="nvim"
 alias vi="nvim"
+
 alias __dots="cd ~/Projects/Personal/dots/; vim"
+alias __weather="curl wttr.in"
 
 # bun completions
 [ -s "/Users/jakubmarkiewicz/.bun/_bun" ] && source "/Users/jakubmarkiewicz/.bun/_bun"

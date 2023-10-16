@@ -1,30 +1,30 @@
-local status, cmp = pcall(require, 'cmp')
+local status, cmp = pcall(require, "cmp")
 
-if (not status) then
-	print "cmp not installed"
+if not status then
+	print("cmp not installed")
 	return
 end
 
-local lspkind = require "lspkind"
-local luasnip = require "luasnip"
+local lspkind = require("lspkind")
+local luasnip = require("luasnip")
 
 cmp.setup({
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
-		end
+		end,
 	},
 
 	mapping = cmp.mapping.preset.insert({
-		['<C-d>'] = cmp.mapping.scroll_docs(-4),
-		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<C-e>'] = cmp.mapping.close(),
-		['<CR>'] = cmp.mapping.confirm({
+		["<C-d>"] = cmp.mapping.scroll_docs(-4),
+		["<C-f>"] = cmp.mapping.scroll_docs(4),
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-e>"] = cmp.mapping.close(),
+		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
-			select = true
+			select = true,
 		}),
-		['<Tab>'] = cmp.mapping(function(fallback)
+		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				fallback()
 			elseif luasnip.expand_or_jumpable() then
@@ -32,8 +32,8 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end, { 'i', 's' }),
-		['<S-Tab>'] = cmp.mapping(function(fallback)
+		end, { "i", "s" }),
+		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				fallback()
 			elseif luasnip.jumpable(-1) then
@@ -41,30 +41,26 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end, { 'i', 's' }),
+		end, { "i", "s" }),
 	}),
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp', },
-		{ name = "luasnip", },
+		{ name = "nvim_lsp" },
+		-- { name = "luasnip", },
+		{ name = "buffer", keyword_length = 5, max_item_count = 5 },
 		{ name = "path", keyword_length = 3, max_item_count = 5 },
-		{ name = 'buffer', keyword_length = 5, max_item_count = 5 },
 	}),
 	formatting = {
 		format = lspkind.cmp_format({
 			with_text = true,
 			mode = "symbol_text",
-			menu = ({
+			menu = {
 				buffer = "[Buf]",
 				nvim_lsp = "[LSP]",
 				luasnip = "[Snip]",
 				nvim_lua = "[Lua]",
 				latex_symbols = "[Latex]",
-				path = "[path]"
-			})
+				path = "[path]",
+			},
 		}),
 	},
-	experimental = {
-		ghost_text = false,
-		native_menu = false
-	}
 })

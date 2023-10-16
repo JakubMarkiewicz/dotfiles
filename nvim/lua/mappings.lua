@@ -11,8 +11,10 @@ key_mapper("", "<down>", "<nop>")
 key_mapper("", "<left>", "<nop>")
 key_mapper("", "<right>", "<nop>")
 
--- Don't yank on 'x'
+-- Don't yank on 'x' | 'dd' | 'p'
 key_mapper("n", "x", '"_x')
+key_mapper("n", "dd", '"_dd')
+key_mapper("x", "p", '"_dP')
 
 -- Tabs
 key_mapper("n", "te", ":tabedit<Return>")
