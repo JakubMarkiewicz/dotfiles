@@ -23,3 +23,6 @@ key_mapper("n", "tc", ":tabclose<Return>")
 -- Split
 key_mapper("n", "<Leader>-", ":split<Return><C-w>j")
 key_mapper("n", "<Leader>_", ":vsplit<Return><C-w>l")
+
+-- ZEN
+key_mapper("n", "<Leader>z", ":ZenMode<Return>")

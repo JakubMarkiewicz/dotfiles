@@ -57,7 +57,6 @@ vim.keymap.set("n", ";f", function()
 	builtin.find_files({
 		no_ignore = false,
 		hidden = false,
-		respect_gitignore = false,
 	})
 end)
 
@@ -76,7 +75,7 @@ vim.keymap.set("n", ";t", function()
 	telescope.extensions.file_browser.file_browser({
 		cwd = telescope_buffer_dir(),
 		respect_gitignore = true,
-		no_ignore = true,
+		no_ignore = false,
 		previewer = false,
 		hidden = false,
 		grouped = true,

@@ -39,3 +39,5 @@ v.opt.clipboard:append({ "unnamedplus" })
 v.opt.background = "dark"
 
 v.opt.showtabline = 2
+
+vim.cmd("colorscheme kanagawa-dragon")

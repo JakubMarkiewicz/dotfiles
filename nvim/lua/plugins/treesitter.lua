@@ -26,6 +26,7 @@ ts.setup({
 		"json",
 		"lua",
 		"prisma",
+		"regex",
 		"tsx",
 		"typescript",
 		"vim",

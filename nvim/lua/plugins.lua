@@ -77,17 +77,6 @@ lazy.setup({
 				},
 			})
 		end,
-		lazy = true,
-		event = "VeryLazy",
-	},
-
-	-- prettier support
-	{
-		"prettier/vim-prettier",
-		run = "yarn install",
-		config = function()
-			require("plugins.prettier")
-		end,
 	},
 
 	-- lsp
@@ -103,7 +92,6 @@ lazy.setup({
 			require("plugins.null-ls")
 		end,
 	},
-	"MunifTanjim/prettier.nvim",
 
 	-- tsserver lsp support
 	{
@@ -133,6 +121,8 @@ lazy.setup({
 		end,
 	},
 
+	{ "akinsho/git-conflict.nvim", version = "*", config = true },
+
 	-- lspsaga - lsp uis
 	{
 		"glepnir/lspsaga.nvim",
@@ -149,10 +139,13 @@ lazy.setup({
 	"onsails/lspkind.nvim",
 
 	-- snippet engine
-	"L3MON4D3/LuaSnip",
-
-	-- snippets
-	"rafamadriz/friendly-snippets",
+	{
+		"L3MON4D3/LuaSnip",
+		dependencies = { "rafamadriz/friendly-snippets" },
+		config = function()
+			require("luasnip.loaders.from_vscode").lazy_load()
+		end,
+	},
 
 	-- cmp - auto completion
 	{
@@ -223,40 +216,55 @@ lazy.setup({
 
 	-- theme
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
+		"rebelot/kanagawa.nvim",
+		lazy = false,
+		priority = 1000,
 		config = function()
-			--require("github-theme").setup({
-			--	-- ...
-			--})
-
-			vim.cmd("colorscheme catppuccin-mocha")
+			vim.cmd("colorscheme kanagawa-dragon")
 		end,
 	},
-
-	{
-		"projekt0n/github-nvim-theme",
-		lazy = true,   -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
-		config = function()
-			--require("github-theme").setup({
-			--	-- ...
-			--})
-
-			--vim.cmd("colorscheme github_dark_dimmed")
-		end,
-	},
-
 	-- indent
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		opts = {
-			indent = { char = "." },
-			whitespace = {
-				remove_blankline_trail = false,
-			},
-			scope = { enabled = false },
+			indent = { char = "‧" },
+
+			whitespace = { highlight = { "Whitespace", "NonText" } },
 		},
+	},
+
+	-- zen mode
+	{
+		"folke/zen-mode.nvim",
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
+	},
+
+	-- formatting
+	{
+		"stevearc/conform.nvim",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+		keys = {
+			{
+				"<leader>f",
+				function()
+					require("conform").format({ async = true, lsp_fallback = true })
+				end,
+				desc = "Format buffer",
+			},
+		},
+		config = function()
+			require("plugins.conform")
+		end,
+	},
+
+	-- wakatime
+	{
+		"wakatime/vim-wakatime",
 	},
 })

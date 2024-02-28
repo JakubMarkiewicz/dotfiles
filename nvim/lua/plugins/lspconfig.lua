@@ -1,37 +1,31 @@
-local status, nvim_lsp = pcall(require, "lspconfig")
+local status, lspconfig = pcall(require, "lspconfig")
 
 if not status then
 	print("lspconfig not installed")
 	return
 end
 
-local on_attach = function(client, bufnr)
-	-- format on save
-	-- if client.server_capabilities.documentFormattingProvider then
-	-- 	vim.api.nvim_create_autocmd("BufWritePre", {
-	-- 		group = vim.api.nvim_create_augroup("Format", { clear = true }),
-	-- 		buffer = bufnr,
-	-- 		callback = function()
-	-- 			vim.lsp.buf.formatting_seq_sync()
-	-- 		end,
-	-- 	})
-	-- end
-end
+local on_attach = function(_, _) end
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-nvim_lsp.cssls.setup({ on_attach = on_attach, capabilities = capabilities })
+lspconfig.cssls.setup({ on_attach = on_attach, capabilities = capabilities })
 
-nvim_lsp.jsonls.setup({ on_attach = on_attach, capabilities = capabilities })
+lspconfig.jsonls.setup({ on_attach = on_attach, capabilities = capabilities })
 
-nvim_lsp.prismals.setup({
+lspconfig.prismals.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 })
 
-nvim_lsp.lua_ls.setup({
+lspconfig.mdx_analyzer.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
+
+lspconfig.lua_ls.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {
@@ -47,9 +41,9 @@ nvim_lsp.lua_ls.setup({
 	},
 })
 
-nvim_lsp.eslint.setup({
-	on_attach = function(_client, bufnr)
-		vim.api.nvim_create_autocmd("BufWrite", {
+lspconfig.eslint.setup({
+	on_attach = function(_, bufnr)
+		vim.api.nvim_create_autocmd("BufWritePre", {
 			buffer = bufnr,
 			command = "EslintFixAll",
 		})

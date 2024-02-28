@@ -52,3 +52,5 @@ alias __weather="curl wttr.in"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+export PATH="$(brew --prefix)/opt/curl/bin:$PATH"
+export HOMEBREW_GITHUB_API_TOKEN=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

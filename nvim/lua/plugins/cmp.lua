@@ -22,8 +22,9 @@ cmp.setup({
 		["<C-e>"] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
+			select = false,
 		}),
+
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				fallback()
@@ -45,9 +46,9 @@ cmp.setup({
 	}),
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
-		-- { name = "luasnip", },
-		{ name = "buffer", keyword_length = 5, max_item_count = 5 },
-		{ name = "path", keyword_length = 3, max_item_count = 5 },
+		{ name = "luasnip", max_item_count = 3 },
+		{ name = "buffer", keyword_length = 5, max_item_count = 3 },
+		{ name = "path", keyword_length = 3, max_item_count = 3 },
 	}),
 	formatting = {
 		format = lspkind.cmp_format({

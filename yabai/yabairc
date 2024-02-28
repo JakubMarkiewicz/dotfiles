@@ -24,3 +24,5 @@ yabai -m config mouse_drop_action            swap
 # general space settings
 yabai -m config layout                       bsp
 yabai -m config window_gap                   06
+
+yabai -m config top_padding 25 bottom_padding 25 left_padding 25 right_padding 25 window_gap 5 external_bar main:35:0
