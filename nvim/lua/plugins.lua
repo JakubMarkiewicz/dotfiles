@@ -31,6 +31,9 @@ lazy.setup({
 		end,
 	},
 
+	-- ollama
+	{ "David-Kunz/gen.nvim" },
+
 	-- global search and replace
 	{
 		"windwp/nvim-spectre",

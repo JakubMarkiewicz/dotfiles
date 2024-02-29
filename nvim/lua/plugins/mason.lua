@@ -1,21 +1,19 @@
 local status, mason = pcall(require, "mason")
 
-if (not status) then
-	print "Mason not installed"
+if not status then
+	print("Mason not installed")
 	return
 end
 
-mason.setup {}
+mason.setup({})
 
+local masonStatus, mason_lsp = pcall(require, "mason-lspconfig")
 
-local status, mason_lsp = pcall(require, "mason-lspconfig")
-
-if (not status) then
-	print "Mason-lspconfig not installed"
+if not masonStatus then
+	print("Mason-lspconfig not installed")
 	return
 end
 
-
-mason_lsp.setup {
-	automatic_installation = true
-}
+mason_lsp.setup({
+	automatic_installation = true,
+})
