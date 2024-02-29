@@ -219,13 +219,14 @@ lazy.setup({
 
 	-- theme
 	{
-		"rebelot/kanagawa.nvim",
+		"olivercederborg/poimandres.nvim",
 		lazy = false,
 		priority = 1000,
 		config = function()
-			vim.cmd("colorscheme kanagawa-dragon")
+			vim.cmd("colorscheme poimandres")
 		end,
 	},
+
 	-- indent
 	{
 		"lukas-reineke/indent-blankline.nvim",
