@@ -20,6 +20,11 @@ lspconfig.prismals.setup({
 	capabilities = capabilities,
 })
 
+lspconfig.biome.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
+
 lspconfig.mdx_analyzer.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
