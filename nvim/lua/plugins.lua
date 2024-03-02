@@ -17,7 +17,7 @@ lazy.setup({
 				suggestion = {
 					enabled = true,
 					auto_trigger = true,
-					debounce = 75,
+					debounce = 25,
 					keymap = {
 						accept = "<M-l>",
 						accept_word = false,
@@ -25,6 +25,10 @@ lazy.setup({
 						next = "<M-]>",
 						prev = "<M-[>",
 						dismiss = "<C-]>",
+					},
+					filetypes = {
+						makrdown = true,
+						mdx = true,
 					},
 				},
 			})
