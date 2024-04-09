@@ -15,7 +15,7 @@ lazy.setup({
 		config = function()
 			require("copilot").setup({
 				suggestion = {
-					enabled = true,
+					enabled = false,
 					auto_trigger = true,
 					debounce = 25,
 					keymap = {
@@ -110,6 +110,16 @@ lazy.setup({
 		config = function()
 			require("plugins.null-ls")
 		end,
+	},
+
+	-- flutter
+	{
+		"akinsho/flutter-tools.nvim",
+		lazy = false,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		config = true,
 	},
 
 	-- tsserver lsp support
