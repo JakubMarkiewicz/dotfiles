@@ -57,7 +57,23 @@ vim.keymap.set("n", ";f", function()
 	builtin.find_files({
 		no_ignore = false,
 		hidden = false,
+		path_display = { "filename_first" },
 	})
+end)
+
+-- go to definition
+vim.keymap.set("n", "gd", function()
+	builtin.lsp_definitions()
+end)
+
+-- go to type definition
+vim.keymap.set("n", "gD", function()
+	builtin.lsp_type_definitions()
+end)
+
+-- display references
+vim.keymap.set("n", "gR", function()
+	builtin.lsp_references()
 end)
 
 -- resume previous telescope action
@@ -67,23 +83,31 @@ end)
 
 -- grep in files
 vim.keymap.set("n", ";g", function()
-	builtin.live_grep()
+	builtin.live_grep({
+		path_display = { "tail" },
+	})
 end)
 
 -- file browser
-vim.keymap.set("n", ";t", function()
-	telescope.extensions.file_browser.file_browser({
-		cwd = telescope_buffer_dir(),
-		respect_gitignore = true,
-		no_ignore = false,
-		previewer = false,
-		hidden = false,
-		grouped = true,
-		initial_mode = "normal",
-	})
-end)
+-- currently testing oil.nvim as a replacement
+-- vim.keymap.set("n", ";t", function()
+-- 	telescope.extensions.file_browser.file_browser({
+-- 		cwd = telescope_buffer_dir(),
+-- 		respect_gitignore = true,
+-- 		no_ignore = false,
+-- 		previewer = false,
+-- 		hidden = false,
+-- 		grouped = true,
+-- 		initial_mode = "normal",
+-- 	})
+-- end)
 
 -- buffers
 vim.keymap.set("n", ";b", function()
 	builtin.buffers()
+end)
+
+-- git
+vim.keymap.set("n", "<Leader>gs", function()
+	builtin.git_status()
 end)

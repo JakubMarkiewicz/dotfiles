@@ -6,49 +6,38 @@ if not status then
 end
 
 lazy.setup({
-	-- copilot
+	-- folding
 	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		build = ":Copilot auth",
-		event = "InsertEnter",
+		"kevinhwang91/nvim-ufo",
+		dependencies = { "kevinhwang91/promise-async" },
 		config = function()
-			require("copilot").setup({
-				suggestion = {
-					enabled = false,
-					auto_trigger = true,
-					debounce = 25,
-					keymap = {
-						accept = "<M-l>",
-						accept_word = false,
-						accept_line = false,
-						next = "<M-]>",
-						prev = "<M-[>",
-						dismiss = "<C-]>",
-					},
-					filetypes = {
-						makrdown = true,
-						mdx = true,
-					},
-				},
+			require("ufo").setup({
+				provider_selector = function()
+					return { "lsp", "indent" }
+				end,
 			})
+
+			vim.keymap.set("n", "zO", require("ufo").openAllFolds)
+			vim.keymap.set("n", "zC", require("ufo").closeAllFolds)
 		end,
 	},
 
+	-- sql
 	{
-		"CopilotC-Nvim/CopilotChat.nvim",
-		branch = "canary",
+		"kndndrj/nvim-dbee",
 		dependencies = {
-			{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+			"MunifTanjim/nui.nvim",
 		},
+		build = function()
+			-- Install tries to automatically detect the install method.
+			-- if it fails, try calling it with one of these parameters:
+			--    "curl", "wget", "bitsadmin", "go"
+			require("dbee").install()
+		end,
 		config = function()
-			require("CopilotChat").setup({})
+			require("dbee").setup(--[[optional config]])
 		end,
 	},
-
-	-- ollama
-	{ "David-Kunz/gen.nvim" },
 
 	-- global search and replace
 	{
@@ -58,43 +47,48 @@ lazy.setup({
 		end,
 	},
 
-	-- highlight occurrences of current cursor word
-	"RRethy/vim-illuminate",
+	-- file explorer
+	{
+		"stevearc/oil.nvim",
+		---@module 'oil'
+		---@type oil.SetupOpts
+		opts = {},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("oil").setup()
+		end,
+	},
 
 	-- tree-sitter
 	-- incremental language parser
 	-- useful for better highlighting
 	{
 		"nvim-treesitter/nvim-treesitter",
-		run = "TSUpdate",
+		build = ":TSUpdate",
 		config = function()
 			require("plugins.treesitter")
 		end,
 	},
-
 	{
 		"windwp/nvim-ts-autotag",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
-			require("nvim-ts-autotag").setup({
-				filetypes = {
-					"html",
-					"javascript",
-					"typescript",
-					"javascriptreact",
-					"typescriptreact",
-					"svelte",
-					"vue",
-					"tsx",
-					"jsx",
-					"rescript",
-					"css",
-					"lua",
-					"xml",
-					"php",
-					"markdown",
-				},
+			require("nvim-ts-autotag").setup()
+		end,
+	},
+
+	{
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		config = function()
+			require("ts_context_commentstring").setup({
+				enable_autocmd = false,
 			})
+			local f_get_option = vim.filetype.get_option
+			vim.filetype.get_option = function(filetype, option)
+				return option == "commentstring"
+						and require("ts_context_commentstring.internal").calculate_commentstring()
+					or f_get_option(filetype, option)
+			end
 		end,
 	},
 
@@ -104,33 +98,6 @@ lazy.setup({
 		config = function()
 			require("plugins.lspconfig")
 		end,
-	},
-	{
-		"nvimtools/none-ls.nvim",
-		config = function()
-			require("plugins.null-ls")
-		end,
-	},
-
-	-- flutter
-	{
-		"akinsho/flutter-tools.nvim",
-		lazy = false,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		config = true,
-	},
-
-	-- tsserver lsp support
-	{
-		"pmizio/typescript-tools.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		opts = {
-			settings = {
-				expose_as_code_action = "all",
-			},
-		},
 	},
 
 	-- git
@@ -150,31 +117,21 @@ lazy.setup({
 		end,
 	},
 
-	{ "akinsho/git-conflict.nvim", version = "*", config = true },
-
-	-- lspsaga - lsp uis
-	{
-		"glepnir/lspsaga.nvim",
-		config = function()
-			require("plugins.lspsaga")
-		end,
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
-		},
-	},
-
+	-- {
+	-- 	"akinsho/git-conflict.nvim",
+	-- 	version = "*",
+	-- 	config = function()
+	-- 		require("git-conflict").setup({
+	-- 			highlights = { -- They must have background color, otherwise the default color will be used
+	-- 				incoming = "DiffAdd",
+	-- 				current = "DiffRemove",
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
+	"sindrets/diffview.nvim",
 	-- lsp pictograms
 	"onsails/lspkind.nvim",
-
-	-- snippet engine
-	{
-		"L3MON4D3/LuaSnip",
-		dependencies = { "rafamadriz/friendly-snippets" },
-		config = function()
-			require("luasnip.loaders.from_vscode").lazy_load()
-		end,
-	},
 
 	-- cmp - auto completion
 	{
@@ -188,24 +145,6 @@ lazy.setup({
 	"hrsh7th/cmp-path",
 	"hrsh7th/cmp-cmdline",
 	"saadparwaiz1/cmp_luasnip",
-
-	-- autopairs
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		opts = {}, -- this is equalent to setup({}) function
-		config = function()
-			require("plugins.autopairs")
-		end,
-	},
-
-	-- lualine
-	{
-		"nvim-lualine/lualine.nvim",
-		config = function()
-			require("plugins.lualine")
-		end,
-	},
 
 	-- common utilities required by telescope
 	"nvim-lua/plenary.nvim",
@@ -241,37 +180,65 @@ lazy.setup({
 			require("plugins.mason")
 		end,
 	},
+
 	"williamboman/mason-lspconfig.nvim",
 
 	-- theme
 	{
-		"olivercederborg/poimandres.nvim",
-		lazy = false,
+		"sainnhe/gruvbox-material",
 		priority = 1000,
+		lazy = false,
 		config = function()
-			vim.cmd("colorscheme poimandres")
+			vim.api.nvim_create_autocmd("ColorSchemePre", {
+				group = vim.api.nvim_create_augroup("gruvbox_material_background", {}),
+				pattern = "gruvbox-material",
+				callback = function()
+					vim.g.gruvbox_material_background = vim.o.bg == "dark" and "hard" or "medium"
+				end,
+			})
+			vim.cmd("colorscheme gruvbox-material")
 		end,
 	},
-
 	-- indent
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		opts = {
-			indent = { char = "‧" },
-
+			indent = { char = "·" },
 			whitespace = { highlight = { "Whitespace", "NonText" } },
 		},
 	},
 
 	-- zen mode
+	-- {
+	-- 	"folke/zen-mode.nvim",
+	-- },
+
 	{
-		"folke/zen-mode.nvim",
-		opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
-		},
+		"shortcuts/no-neck-pain.nvim",
+		version = "*",
+		config = function()
+			require("no-neck-pain").setup({
+				buffers = {
+					scratchPad = {
+						-- set to `false` to
+						-- disable auto-saving
+						enabled = true,
+						-- set to `nil` to default
+						-- to current working directory
+						location = "~/Documents/",
+					},
+				},
+			})
+		end,
+	},
+
+	-- linting
+	{
+		"mfussenegger/nvim-lint",
+		config = function()
+			require("plugins.lint")
+		end,
 	},
 
 	-- formatting
@@ -296,5 +263,42 @@ lazy.setup({
 	-- wakatime
 	{
 		"wakatime/vim-wakatime",
+	},
+
+	-- mini
+	{
+		"echasnovski/mini.statusline",
+		version = false,
+		config = function()
+			require("mini.statusline").setup({})
+		end,
+	},
+	{
+		"echasnovski/mini.pairs",
+		version = false,
+		config = function()
+			require("mini.pairs").setup()
+		end,
+	},
+	{
+		"echasnovski/mini.cursorword",
+		version = false,
+		config = function()
+			require("mini.cursorword").setup()
+		end,
+	},
+	{
+		"echasnovski/mini.surround",
+		version = false,
+		config = function()
+			require("mini.surround").setup()
+		end,
+	},
+	{
+		"echasnovski/mini.ai",
+		version = false,
+		config = function()
+			require("mini.ai").setup()
+		end,
 	},
 })

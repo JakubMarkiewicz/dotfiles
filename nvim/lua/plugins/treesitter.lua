@@ -20,7 +20,6 @@ ts.setup({
 		"diff",
 		"dockerfile",
 		"graphql",
-		"help",
 		"javascript",
 		"jsdoc",
 		"json",
@@ -32,8 +31,5 @@ ts.setup({
 		"vim",
 		"markdown",
 		"markdown_inline",
-	},
-	autotag = {
-		enable = true,
 	},
 })

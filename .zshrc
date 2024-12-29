@@ -55,3 +55,19 @@ export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export PATH="$(brew --prefix)/opt/curl/bin:$PATH"
 export PATH=$HOME/Projects/flutter/bin:$PATH
 export HOMEBREW_GITHUB_API_TOKEN=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
+
+# pnpm
+export PNPM_HOME="/Users/jakubmarkiewicz/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+
+export PATH=".cargo/bin:$PATH"
+
+# enable fzf on [command] ** OR [command] CTRL+T
+eval "$(fzf --zsh)"
+
+eval "$(pyenv init --path)"

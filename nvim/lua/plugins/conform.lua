@@ -14,25 +14,27 @@ local function has_biome_config()
 	return exists and true or false
 end
 
-local function get_formatter()
-	local result
+local p_or_b
+local function prettier_or_biome()
 	return function()
-		if result then
-			return result
+		if p_or_b then
+			return p_or_b
 		end
 
 		if has_biome_config() then
-			result = { { "biome" } }
+			p_or_b = { "biome" }
 		else
-			result = { { "prettierd" } }
+			p_or_b = { "prettierd" }
 		end
-		return result
+		return p_or_b
 	end
 end
 
-local prettier_or_biome = get_formatter()
-
 conform.setup({
+	default_format_opts = {
+		lsp_fallback = true,
+		stop_after_first = true,
+	},
 	formatters_by_ft = {
 		lua = { "stylua" },
 		["javascript"] = prettier_or_biome(),
@@ -49,11 +51,18 @@ conform.setup({
 		["yaml"] = prettier_or_biome(),
 		["markdown"] = prettier_or_biome(),
 		["graphql"] = prettier_or_biome(),
+		["sql"] = { "sql_formatter" },
+		rust = { "rustfmt" },
+		go = { "gofmt" },
 	},
-	format_on_save = { timeout_ms = 500, lsp_fallback = true },
+	format_on_save = { timeout_ms = 500 },
 	formatters = {
 		shfmt = {
 			prepend_args = { "-i", "2" },
+		},
+		sql_formatter = {
+			command = "sql-formatter",
+			args = { "-l", "postgresql" },
 		},
 	},
 })

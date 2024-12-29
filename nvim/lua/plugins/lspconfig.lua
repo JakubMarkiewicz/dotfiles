@@ -7,32 +7,31 @@ end
 
 local on_attach = function(_, _) end
 
--- Add additional capabilities supported by nvim-cmp
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+local lspconfig_defaults = require("lspconfig").util.default_config
+lspconfig_defaults.capabilities =
+	vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-lspconfig.cssls.setup({ on_attach = on_attach, capabilities = capabilities })
+local servers = {
+	"cssls",
+	"jsonls",
+	"tailwindcss",
+	"rust_analyzer",
+	"prismals",
+	"biome",
+	"mdx_analyzer",
+	"gopls",
+	"svelte",
+}
 
-lspconfig.jsonls.setup({ on_attach = on_attach, capabilities = capabilities })
+for _, v in pairs(servers) do
+	lspconfig[v].setup({ on_attach })
+end
 
-lspconfig.prismals.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-
-lspconfig.biome.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-
-lspconfig.mdx_analyzer.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
+lspconfig.vtsls.setup({
+	-- root_dir = lspconfig.util.root_pattern(".git"),
 })
 
 lspconfig.lua_ls.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
 	settings = {
 		Lua = {
 			diagnostics = {
@@ -47,11 +46,13 @@ lspconfig.lua_ls.setup({
 })
 
 lspconfig.eslint.setup({
+	settings = {
+		workingDirectories = { mode = "auto" },
+	},
 	on_attach = function(_, bufnr)
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			buffer = bufnr,
 			command = "EslintFixAll",
 		})
 	end,
-	capabilities = capabilities,
 })

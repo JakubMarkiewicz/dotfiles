@@ -6,19 +6,24 @@ if not status then
 end
 
 local lspkind = require("lspkind")
-local luasnip = require("luasnip")
+-- local luasnip = require("luasnip")
 
 cmp.setup({
+	opts = {
+		debounce = 0,
+		throttle = 0,
+	},
+
 	snippet = {
 		expand = function(args)
-			luasnip.lsp_expand(args.body)
+			vim.snippet.expand(args.body)
 		end,
 	},
 
 	mapping = cmp.mapping.preset.insert({
 		["<C-d>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-x>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
@@ -28,8 +33,6 @@ cmp.setup({
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				fallback()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
 			else
 				fallback()
 			end
@@ -37,8 +40,6 @@ cmp.setup({
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				fallback()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
 			else
 				fallback()
 			end
@@ -46,9 +47,6 @@ cmp.setup({
 	}),
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
-		{ name = "luasnip", max_item_count = 3 },
-		{ name = "buffer", keyword_length = 5, max_item_count = 3 },
-		{ name = "path", keyword_length = 3, max_item_count = 3 },
 	}),
 	formatting = {
 		format = lspkind.cmp_format({
@@ -64,4 +62,15 @@ cmp.setup({
 			},
 		}),
 	},
+})
+
+-- support for cmp inside cmdline
+cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = "path" },
+	}, {
+		{ name = "cmdline" },
+	}),
+	matching = { disallow_symbol_nonprefix_matching = false },
 })
